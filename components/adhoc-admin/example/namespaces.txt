@@ -1,0 +1,6 @@
+redhat-ods-monitoring
+istio-system
+rhods-notebooks
+knative-serving
+knative-eventing
+openshift-pipelines
