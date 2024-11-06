@@ -3,9 +3,6 @@ kind: Kustomization
 
 resources:
 - ../components/install-rhoai
-- ../components/cluster-config
-- ../components/demo-kueue
-- ../components/demo-kueue-config
 
 patches:
   - target:
@@ -16,4 +13,4 @@ patches:
         path: /spec/template/spec/containers/0/env/0
         value:
           name: INSTANCE_TYPE
-          value: g5.2xlarge\
+          value: g5.2xlarge
