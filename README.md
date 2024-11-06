@@ -9,3 +9,9 @@ Run Demo
 ```sh
 until oc apply -k demo; do : ; done
 ```
+
+## Uninstall
+
+```sh
+oc apply -k demo/uninstall
+```
