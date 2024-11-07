@@ -117,7 +117,7 @@ uninstall_demo(){
 
   delete_crs
 
-  oc delete --ignore-not-found=true --timeout=0s --force -k https://github.com/hemang-rh/openshift-gitops/demo
+  oc delete --ignore-not-found=true --timeout=0s --force -k https://github.com/adrezni/cluster-jump-start/demo
 
   delete_misc
   delete_crds

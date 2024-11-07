@@ -1,3 +1,4 @@
+custom-notebooks
 istio-system
 knative-eventing
 knative-serving
