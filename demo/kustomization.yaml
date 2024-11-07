@@ -7,3 +7,4 @@ resources:
 - ../components/rhoai-custom-notebooks
 - ../components/minio
 - ../components/pgadmin4
+- ../components/web-terminal
