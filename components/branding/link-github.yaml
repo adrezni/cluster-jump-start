@@ -1,0 +1,11 @@
+apiVersion: console.openshift.io/v1
+kind: ConsoleLink
+metadata:
+  name: github-jump-start
+spec:
+  href: 'https://github.com/adrezni/cluster-jump-start'
+  location: ApplicationMenu
+  text: GitHub - Cluster Jump Start
+  applicationMenu:
+    section: Git Repos
+    imageURL: /static/assets/public/imgs/logos/github.svg
