@@ -1,6 +1,7 @@
-redhat-ods-monitoring
 istio-system
-rhods-notebooks
-knative-serving
 knative-eventing
+knative-serving
+minio
 openshift-pipelines
+redhat-ods-monitoring
+rhods-notebooks
