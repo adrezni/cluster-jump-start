@@ -16,3 +16,9 @@ components:
 resources:
   - base
   - user0
+
+patches:
+  - target:
+      kind: ConsoleNotification
+      name: banner-demo
+    path: patch-banner.yaml
