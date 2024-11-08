@@ -10,7 +10,7 @@ labels:
     workshop: structured-data-healthcare
 
 components:
-  - components/workshop-groups
+  - ../../components/workshop-groups
 
 resources:
   - base
