@@ -5,19 +5,3 @@ resources:
 # - htpasswd-secret.yaml
 - link-github.yaml
 # - minio-rb-view.yaml
-
-patches:
-  - path: dashboard-config-cr.yaml
-  - target:
-      kind: ConsoleNotification
-      name: banner-demo
-    patch: |-
-      - op: replace
-        path: /spec/text
-        value: 'WORKSHOP: Fraud Detection w/ Red Hat OpenShift AI'
-  - path: patch-idp.yaml
-    target:
-      group: config.openshift.io
-      kind: OAuth
-      name: cluster
-      version: v1
