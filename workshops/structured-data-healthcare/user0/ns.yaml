@@ -5,9 +5,9 @@ metadata:
   name: user0
   annotations:
     openshift.io/description: |
-      A personal project to explore the wonders of science!
+      A personal project to explore structuring healthcare data
     # openshift.io/display-name: Start Here - user0
-    openshift.io/display-name: Fraud Detection
+    openshift.io/display-name: Structuring unstructured data for healthcare
     openshift.io/requester: workshop
   labels:
     owner: workshop
