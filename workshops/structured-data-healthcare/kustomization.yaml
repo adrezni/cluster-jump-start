@@ -11,8 +11,8 @@ labels:
 
 components:
   - ../../components/workshop-groups
-  - ../../components/rhoai-for-workshops
 
 resources:
   - base
   - user0
+  - ../../components/rhoai-for-workshops
