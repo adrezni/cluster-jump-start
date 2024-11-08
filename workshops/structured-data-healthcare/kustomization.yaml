@@ -10,9 +10,9 @@ labels:
     workshop: structured-data-healthcare
 
 components:
+  - ../../components/rhoai-for-workshops
   - ../../components/workshop-groups
 
 resources:
   - base
   - user0
-  - ../../components/rhoai-for-workshops
