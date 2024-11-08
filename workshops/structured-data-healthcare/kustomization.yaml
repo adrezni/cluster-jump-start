@@ -9,7 +9,9 @@ labels:
   pairs:
     workshop: structured-data-healthcare
 
+components:
+  - components/workshop-groups
+
 resources:
-  - self-provisioner-crb.yaml
-  - workshop-admins-group.yaml
-  - workshop-users-group.yaml
+  - base
+  - user0
