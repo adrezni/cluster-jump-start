@@ -10,19 +10,10 @@ namespace: user0
 
 resources:
 - data-connection-secret.yaml
-- job-setup-user.yaml
+# - job-setup-user.yaml
 # - notebook.yaml
 # - pvc.yaml
 - quota.yaml
 - ns-rb-admin.yaml
 # - ns-rb-view.yaml
 - ns.yaml
-
-patches:
-  - patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/env/5/value
-        value: user0
-    target:
-      kind: Job
-      name: data-connection-setup

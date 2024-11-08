@@ -1,11 +1,11 @@
 apiVersion: console.openshift.io/v1
 kind: ConsoleLink
 metadata:
-  name: github-workshop
+  name: github-patient-charts
 spec:
-  href: 'https://github.com/rh-aiservices-bu/fraud-detection'
+  href: https://github.com/redhat-na-ssa/datasci-patient-charts
   location: ApplicationMenu
-  text: GitHub - Fraud Detection
+  text: GitHub - Patient Charts
   applicationMenu:
     section: Git Repos
     imageURL: /static/assets/public/imgs/logos/github.svg

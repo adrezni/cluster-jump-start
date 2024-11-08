@@ -6,7 +6,6 @@ metadata:
   name: user0-admin
   namespace: user0
   labels:
-    owner: workshop
     opendatahub.io/dashboard: 'true'
     opendatahub.io/project-sharing: 'true'
 roleRef:
