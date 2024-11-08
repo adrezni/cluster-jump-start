@@ -74,7 +74,6 @@ delete_misc(){
     operators.coreos.com/servicemeshoperator.openshift-operators
     operators.coreos.com/serverless-operator.openshift-serverless
     operators.coreos.com/web-terminal.openshift-operators
-    
   )
 
   # shellcheck disable=SC2068
@@ -106,20 +105,12 @@ uninstall_demo(){
 
   echo "start: uninstall"
 
-  # oc delete --ignore-not-found=true --grace-period="${TIMEOUT}" datasciencecluster default-dsc
-  # oc delete --ignore-not-found=true --grace-period="${TIMEOUT}" dscinitialization default-dsci
-
-  # sleep 8
-
-  # oc delete --ignore-not-found=true --grace-period="${TIMEOUT}" -A --all servicemeshcontrolplanes.maistra.io
-  # oc delete --ignore-not-found=true --grace-period="${TIMEOUT}" -A --all servicemeshmemberrolls.maistra.io
-  # oc delete --ignore-not-found=true --grace-period="${TIMEOUT}" -A --all servicemeshmembers.maistra.io
-
   delete_crs
+  delete_misc
 
   oc delete --ignore-not-found=true --timeout=0s --force -k https://github.com/adrezni/cluster-jump-start/demo
 
-  delete_misc
+
   delete_crds
   delete_namespaces
 
