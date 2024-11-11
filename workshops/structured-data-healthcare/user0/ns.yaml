@@ -7,8 +7,8 @@ metadata:
     openshift.io/description: |
       A personal project to explore structuring healthcare data
     # openshift.io/display-name: Start Here - user0
-    openshift.io/display-name: Structuring unstructured data for healthcare
-    openshift.io/requester: workshop
+    openshift.io/display-name: Structuring Unstructured Data for Healthcare
+    openshift.io/requester: user0
   labels:
     owner: workshop
     kubernetes.io/metadata.name: user0

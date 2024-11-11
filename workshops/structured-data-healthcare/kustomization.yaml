@@ -14,6 +14,7 @@ components:
   - ../../components/workshop-groups
 
 resources:
+  - ../base
   - base
   - user0
 
