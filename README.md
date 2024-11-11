@@ -16,7 +16,7 @@ Run Structured Data for Healthcare Workshop
 until oc apply -k workshops/structured-data-healthcare; do : ; done
 
 . workshops/workshop_functions.sh
-workshop_create_users 40
+workshop_create_users workshops/structured-data-healthcare/user0 40
 ```
 
 ## Uninstall
