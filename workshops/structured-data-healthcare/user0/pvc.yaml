@@ -3,10 +3,10 @@ kind: PersistentVolumeClaim
 metadata:
   annotations:
     openshift.io/description: "Connects persistent storage to a notebook"
-    openshift.io/display-name: Fraud Detection
+    openshift.io/display-name: Health Data
   labels:
     opendatahub.io/dashboard: "true"
-  name: fraud-detection
+  name: explore-data
 spec:
   accessModes:
   - ReadWriteOnce

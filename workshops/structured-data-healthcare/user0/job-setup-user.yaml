@@ -41,7 +41,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: GIT_URL
-            value: https://github.com/rh-aiservices-bu/fraud-detection.git
+            value: https://github.com/redhat-na-ssa/datasci-patient-charts
         command: ["/bin/bash"]
         args:
         - -ec
@@ -49,11 +49,8 @@ spec:
           #!/bin/bash
 
           clone_repo(){
-            rmdir lost+found || true
-
             cd /data
             git clone "${GIT_URL}" || true
-
           }
 
           make_jupyter_great(){
@@ -78,10 +75,11 @@ spec:
           # make_jupyter_great
 
         volumeMounts:
-          - name: fraud-detection
+          - name: explore-data
             mountPath: /data
+            subPath: kludge
       restartPolicy: Never
       volumes:
-      - name: fraud-detection
+      - name: explore-data
         persistentVolumeClaim:
-          claimName: fraud-detection
+          claimName: explore-data

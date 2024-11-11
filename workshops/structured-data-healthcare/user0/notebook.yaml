@@ -7,13 +7,12 @@ metadata:
     notebooks.opendatahub.io/last-image-selection: 'tensorflow:2023.2'
     notebooks.opendatahub.io/last-size-selection: "Demo / Workshop"
     opendatahub.io/username: user0
-    openshift.io/description: "My Fraud Detection workbench"
-    openshift.io/display-name: Fraud Detection
+    openshift.io/description: "Explore Health Data"
+    openshift.io/display-name: Healthcare Data
   labels:
-    app: fraud-detection
     opendatahub.io/dashboard: "true"
     opendatahub.io/odh-managed: "true"
-  name: fraud-detection
+  name: explore-data
   namespace: user0
 spec:
   template:
@@ -35,7 +34,7 @@ spec:
             --ServerApp.port=8888
             --ServerApp.token=''
             --ServerApp.password=''
-            --ServerApp.base_url=/notebook/user0/fraud-detection
+            --ServerApp.base_url=/notebook/user0/explore-data
             --ServerApp.quit_button=False
         - name: JUPYTER_IMAGE
           value: image-registry.openshift-image-registry.svc:5000/redhat-ods-applications/tensorflow:2023.2
@@ -47,14 +46,14 @@ spec:
         livenessProbe:
           failureThreshold: 3
           httpGet:
-            path: /notebook/user0/fraud-detection/api
+            path: /notebook/user0/explore-data/api
             port: notebook-port
             scheme: HTTP
           initialDelaySeconds: 10
           periodSeconds: 5
           successThreshold: 1
           timeoutSeconds: 1
-        name: fraud-detection
+        name: explore-data
         ports:
         - containerPort: 8888
           name: notebook-port
@@ -62,7 +61,7 @@ spec:
         readinessProbe:
           failureThreshold: 3
           httpGet:
-            path: /notebook/user0/fraud-detection/api
+            path: /notebook/user0/explore-data/api
             port: notebook-port
             scheme: HTTP
           initialDelaySeconds: 10
@@ -78,13 +77,14 @@ spec:
             memory: 1Gi
         volumeMounts:
         - mountPath: /opt/app-root/src
-          name: fraud-detection
+          name: explore-data
+          subPath: kludge
         workingDir: /opt/app-root/src
       - args:
         - --provider=openshift
         - --https-address=:8443
         - --http-address=
-        - --openshift-service-account=fraud-detection
+        - --openshift-service-account=explore-data
         - --cookie-secret-file=/etc/oauth/config/cookie_secret
         - --cookie-expire=24h0m0s
         - --tls-cert=/etc/tls/private/tls.crt
@@ -93,8 +93,8 @@ spec:
         - --upstream-ca=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
         - --email-domain=*
         - --skip-provider-button
-        - --openshift-sar={"verb":"get","resource":"notebooks","resourceAPIGroup":"kubeflow.org","resourceName":"fraud-detection","namespace":"$(NAMESPACE)"}
-        # - --logout-url=https://rhods-dashboard-redhat-ods-applications.apps.cluster-xx7jv.xx7jv.sandbox1365.opentlc.com/projects/ds-group?notebookLogout=fraud-detection
+        - --openshift-sar={"verb":"get","resource":"notebooks","resourceAPIGroup":"kubeflow.org","resourceName":"explore-data","namespace":"$(NAMESPACE)"}
+        # - --logout-url=https://rhods-dashboard-redhat-ods-applications.apps.cluster-xx7jv.xx7jv.sandbox1365.opentlc.com/projects/ds-group?notebookLogout=explore-data
         env:
         - name: NAMESPACE
           valueFrom:
@@ -141,16 +141,16 @@ spec:
         - mountPath: /etc/tls/private
           name: tls-certificates
       enableServiceLinks: false
-      serviceAccountName: fraud-detection
+      serviceAccountName: explore-data
       volumes:
-      - name: fraud-detection
+      - name: explore-data
         persistentVolumeClaim:
-          claimName: fraud-detection
+          claimName: explore-data
       - name: oauth-config
         secret:
           defaultMode: 420
-          secretName: fraud-detection-oauth-config
+          secretName: explore-data-oauth-config
       - name: tls-certificates
         secret:
           defaultMode: 420
-          secretName: fraud-detection-tls
+          secretName: explore-data-tls
