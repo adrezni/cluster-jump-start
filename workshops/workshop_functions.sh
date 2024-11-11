@@ -27,7 +27,7 @@ htpasswd_add_user(){
     PASSWORD: ${PASSWORD}
   "
 
-  touch "${HTPASSWD}"
+  touch "${HTPASSWD}"{,.txt}
   sed -i '/# '"${USERNAME}"'/d' "${HTPASSWD}.txt"
   echo "# ${USERNAME} - ${PASSWORD}" >> "${HTPASSWD}.txt"
   htpasswd -bB -C 10 "${HTPASSWD}" "${USERNAME}" "${PASSWORD}"
@@ -68,8 +68,19 @@ workshop_create_admin(){
 }
 
 workshop_create_users(){
-  TOTAL=${1:-25}
+  USER0=${1:-user0}
+  TOTAL=${2:-25}
   LIST=$(eval echo "{0..${TOTAL}}")
+
+  if [ -d "${USER0}" ]; then
+    echo "Found: user template ${USER0}"
+  else
+    echo "Error: provide a path to user0 template
+      example:
+        workshop_create_users < path to template >
+    "
+    return 1
+  fi
 
   # setup workshop users
   # shellcheck disable=SC2068
@@ -80,7 +91,7 @@ workshop_create_users(){
     # workshop_add_user_to_group "${DEFAULT_USER}${num}" "${DEFAULT_GROUP}"
 
     # create user project from template
-    cp -a workshop/instance "${OBJ_DIR}/${DEFAULT_USER}${num}"
+    cp -a "${USER0}" "${OBJ_DIR}/${DEFAULT_USER}${num}"
     sed -i 's/user0/'"${DEFAULT_USER}${num}"'/g' "${OBJ_DIR}/${DEFAULT_USER}${num}/"*.yaml
     sed -i 's@- ../../components@- ../../../components@g' "${OBJ_DIR}/${DEFAULT_USER}${num}/"kustomization.yaml
 
