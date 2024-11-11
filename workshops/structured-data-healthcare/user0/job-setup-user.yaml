@@ -58,7 +58,7 @@ spec:
 
           [ -d "$(dirname ${CONFIG})" ] || mkdir -p "$(dirname ${CONFIG})"
 
-          echo "{
+          printf '{
               // Theme
               // @jupyterlab/apputils-extension:themes
               // Theme manager settings.
@@ -67,12 +67,12 @@ spec:
               // Selected Theme
               // Application-level visual styling theme
               "theme": "JupyterLab Dark"
-          }" > .jupyter/lab/user-settings/@jupyterlab/apputils-extension/themes.jupyterlab-settings
+          }' > .jupyter/lab/user-settings/@jupyterlab/apputils-extension/themes.jupyterlab-settings
 
           }
 
           clone_repo
-          # make_jupyter_great
+          make_jupyter_great
 
         volumeMounts:
           - name: explore-data
