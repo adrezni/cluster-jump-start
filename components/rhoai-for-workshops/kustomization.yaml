@@ -3,6 +3,7 @@ kind: Component
 
 resources:
 - https://github.com/redhat-na-ssa/demo-ai-gitops-catalog/demos/rhoai-workshop-ready?ref=v0.11
+- rhods-admins-group.yaml
 
 patches:
   - target:

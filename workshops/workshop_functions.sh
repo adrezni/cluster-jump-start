@@ -65,6 +65,9 @@ workshop_create_admin(){
 
   # setup admin user
   htpasswd_add_user "${HTPASSWD_FILE}" admin
+  htpasswd_set_file "${HTPASSWD_FILE}"
+
+  # oc adm groups add-users rhods-admins admin
 }
 
 workshop_create_users(){
@@ -119,7 +122,6 @@ workshop_load_test(){
 
   # update htpasswd in cluster
   htpasswd_set_file "${HTPASSWD_FILE}"
-
 }
 
 setup_user_auth(){

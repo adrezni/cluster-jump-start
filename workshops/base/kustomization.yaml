@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
 - https://github.com/redhat-na-ssa/demo-ai-gitops-catalog/components/cluster-configs/login/overlays/htpasswd?ref=v0.11
-- htpasswd-secret.yaml
+# - htpasswd-secret.yaml
 
 patches:
   - path: patch-idp.yaml
