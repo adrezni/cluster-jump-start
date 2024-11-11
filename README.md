@@ -10,6 +10,15 @@ Run Demo
 until oc apply -k demo; do : ; done
 ```
 
+Run Structured Data for Healthcare Workshop
+
+```sh
+until oc apply -k workshops/structured-data-healthcare; do : ; done
+
+. workshops/workshop_functions.sh
+workshop_create_users 40
+```
+
 ## Uninstall
 
 ```sh
