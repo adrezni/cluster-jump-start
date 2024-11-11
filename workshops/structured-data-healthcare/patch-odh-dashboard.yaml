@@ -1,0 +1,25 @@
+apiVersion: opendatahub.io/v1alpha
+kind: OdhDashboardConfig
+metadata:
+  name: odh-dashboard-config
+  namespace: redhat-ods-applications
+spec:
+  notebookSizes:
+    # kludge: everyone picks the largest, why offer more than one?
+    - name: "Demo / Workshop"
+      resources:
+        limits:
+          cpu: '4'
+          memory: 6Gi
+        requests:
+          cpu: '1'
+          memory: 1Gi
+    # any data scientist that can use a small, deserves employment anywhere
+    - name: Small
+      resources:
+        limits:
+          cpu: '2'
+          memory: 2Gi
+        requests:
+          cpu: '1'
+          memory: 1Gi

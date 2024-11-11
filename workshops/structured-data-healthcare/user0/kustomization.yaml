@@ -10,9 +10,9 @@ namespace: user0
 
 resources:
 - data-connection-secret.yaml
-# - job-setup-user.yaml
-# - notebook.yaml
-# - pvc.yaml
+- job-setup-user.yaml
+- notebook.yaml
+- pvc.yaml
 - quota.yaml
 - ns-rb-admin.yaml
 # - ns-rb-view.yaml

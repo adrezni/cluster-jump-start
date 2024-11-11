@@ -11,14 +11,20 @@ labels:
 
 components:
   - ../../components/rhoai-for-workshops
+  - ../../components/minio-w-ns-known-pw
   - ../../components/workshop-groups
 
 resources:
-  - base
+  - ../base
   - user0
+  - link-github.yaml
 
 patches:
   - target:
       kind: ConsoleNotification
       name: banner-demo
     path: patch-banner.yaml
+  - target:
+      kind: OdhDashboardConfig
+      name: odh-dashboard-config
+    path: patch-odh-dashboard.yaml
