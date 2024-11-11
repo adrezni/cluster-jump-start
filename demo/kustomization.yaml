@@ -3,11 +3,12 @@ kind: Kustomization
 
 components:
 - ../components/branding
+- ../components/minio-w-ns-known-pw
+- ../components/rhoai-for-workshops
 
 resources:
 - ../components/kueue-cluster-config
-- ../components/rhoai-for-workshops
+
 - ../components/rhoai-custom-notebooks
-- ../components/minio
 - ../components/pgadmin4
 - ../components/web-terminal

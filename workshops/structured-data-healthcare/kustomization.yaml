@@ -11,6 +11,7 @@ labels:
 
 components:
   - ../../components/rhoai-for-workshops
+  - ../../components/minio-w-ns-known-pw
   - ../../components/workshop-groups
 
 resources:
