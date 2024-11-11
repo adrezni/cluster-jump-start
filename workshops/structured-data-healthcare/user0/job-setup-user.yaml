@@ -41,7 +41,7 @@ spec:
         imagePullPolicy: IfNotPresent
         env:
           - name: GIT_URL
-            value: https://github.com/rh-aiservices-bu/fraud-detection
+            value: https://github.com/redhat-na-ssa/datasci-patient-charts
         command: ["/bin/bash"]
         args:
         - -ec
