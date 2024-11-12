@@ -45,9 +45,15 @@ htpasswd_get_file(){
 htpasswd_set_file(){
   HTPASSWD=${1:-"${TMP_DIR}/htpasswd-local"}
 
-  oc -n openshift-config \
-    set data secret/"${HTPASSWD##*/}" \
-    --from-file=htpasswd="${HTPASSWD}"
+  if oc -n openshift-config get secret/"${HTPASSWD##*/}" -o name >/dev/name 2>&1; then
+    oc -n openshift-config \
+      set data secret/"${HTPASSWD##*/}" \
+      --from-file=htpasswd="${HTPASSWD}"
+  else
+    oc -n openshift-config \
+      create generic secret "${HTPASSWD##*/}" \
+      --from-file=htpasswd="${HTPASSWD}"
+  fi
 }
 
 workshop_init(){
