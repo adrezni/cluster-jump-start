@@ -1,8 +1,9 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-commonAnnotations:
-  source: https://github.com/adrezni/cluster-jump-start
+# NOTE: this will cause failures on jobs due to changed annotations on the template
+# commonAnnotations:
+#   source: https://github.com/adrezni/cluster-jump-start
 
 labels:
 - includeSelectors: false

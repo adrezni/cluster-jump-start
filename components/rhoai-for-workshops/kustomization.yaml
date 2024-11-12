@@ -21,17 +21,17 @@ patches:
       - op: replace
         path: /spec/operand/image
         value: registry.redhat.io/openshift4/ose-node-feature-discovery-rhel9:v4.16
-  - target:
-      kind: ConsolePlugin
-      name: console-plugin-nvidia-gpu
-    patch: |-
-      - op: replace
-        path: /spec/service
-        value:
-          basePath: /
-          name: console-plugin-nvidia-gpu
-          namespace: nvidia-gpu-operator
-          port: 9443
+  # - target:
+  #     kind: ConsolePlugin
+  #     name: console-plugin-nvidia-gpu
+  #   patch: |-
+  #     - op: replace
+  #       path: /spec/service
+  #       value:
+  #         basePath: /
+  #         name: console-plugin-nvidia-gpu
+  #         namespace: nvidia-gpu-operator
+  #         port: 9443
   - target:
       kind: ConfigMap
       name: notebook-controller-culler-config
