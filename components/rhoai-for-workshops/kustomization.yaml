@@ -32,3 +32,13 @@ patches:
           name: console-plugin-nvidia-gpu
           namespace: nvidia-gpu-operator
           port: 9443
+  - target:
+      kind: ConfigMap
+      name: notebook-controller-culler-config
+    patch: |-
+      - op: replace
+        path: /data
+        value:
+          CULL_IDLE_TIME: "60"
+          ENABLE_CULLING: "true"
+          IDLENESS_CHECK_PERIOD: "1"
