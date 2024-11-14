@@ -7,7 +7,7 @@ This is an example of how to setup OpenShift AI
 Run Demo
 
 ```sh
-until oc apply -k demo; do : ; done
+until oc apply -k demos/default; do : ; done
 ```
 
 Run Structured Data for Healthcare Workshop
