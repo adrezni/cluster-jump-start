@@ -10,7 +10,7 @@ spec:
   source:
     # directory:
     #   recurse: true
-    path: components/argo-apps
+    path: components/argocd-apps
     repoURL: https://github.com/adrezni/cluster-jump-start
     targetRevision: main
   syncPolicy:
