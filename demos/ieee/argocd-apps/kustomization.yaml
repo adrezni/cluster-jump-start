@@ -4,4 +4,8 @@ kind: Component
 namespace: openshift-gitops
 
 resources:
+- app-argocd.yaml
+- app-branding.yaml
 - app-of-apps.yaml
+- app-web-terminal.yaml
+ 

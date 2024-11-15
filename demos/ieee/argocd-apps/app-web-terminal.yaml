@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: web-terminal
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    # directory:
+    #   recurse: true
+    path: components/web-terminal
+    repoURL: https://github.com/adrezni/cluster-jump-start
+    targetRevision: main
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
