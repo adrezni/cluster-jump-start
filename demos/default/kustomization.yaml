@@ -5,6 +5,6 @@ components:
 - ../../components/branding
 - ../../components/kueue-cluster-config
 - ../../components/minio-w-ns-known-pw
-- ../../components/rhoai-for-workshops
+- ../../components/rhoai
 - ../../components/rhoai-custom-notebooks
 - ../../components/web-terminal

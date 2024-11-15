@@ -11,7 +11,7 @@ labels:
     workshop: structured-data-healthcare
 
 components:
-  - ../../components/rhoai-for-workshops
+  - ../../components/rhoai
   - ../../components/minio-w-ns-known-pw
   - ../../components/workshop-groups
 
