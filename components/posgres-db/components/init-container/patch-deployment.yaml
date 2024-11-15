@@ -14,7 +14,7 @@ spec:
           - |
             #!/bin/bash
             
-            echo "hello postgres"
+            echo "insert init command"
         resources:
           limits:
             cpu: 500m
