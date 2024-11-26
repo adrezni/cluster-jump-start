@@ -16,7 +16,6 @@ spec:
       - command:
         - sleep
         - '3600'
-        restartPolicy: OnFailure
         imagePullPolicy: Always
         image: image-registry.openshift-image-registry.svc:5000/openshift/tools:latest
         name: tools
