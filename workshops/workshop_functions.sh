@@ -45,7 +45,7 @@ htpasswd_get_file(){
 htpasswd_set_file(){
   HTPASSWD=${1:-"${TMP_DIR}/htpasswd-local"}
 
-  if oc -n openshift-config get secret/"${HTPASSWD##*/}" -o name >/dev/name 2>&1; then
+  if oc -n openshift-config get secret/"${HTPASSWD##*/}" -o name >/dev/null 2>&1; then
     oc -n openshift-config \
       set data secret/"${HTPASSWD##*/}" \
       --from-file=htpasswd="${HTPASSWD}"
