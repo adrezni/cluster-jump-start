@@ -26,6 +26,19 @@ until oc apply -k demos/parasol-insurance/00-prereqs; do : ; done
 until oc apply -k demos/parasol-insurance; do : ; done
 ```
 
+Verify GPU autoscale
+
+```sh
+# setup gpu workload
+oc apply -k demos/test-gpu-autoscale
+
+# watch for new nodes
+watch oc get nodes,pod -n nvidia-gpu-verification
+
+# cleanup gpu workload
+oc delete -k demos-test-gpu-autoscale
+```
+
 ## Uninstall
 
 ```sh
