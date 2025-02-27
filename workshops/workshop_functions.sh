@@ -8,7 +8,7 @@ WORKSHOP_NUM=${WORKSHOP_NUM:-25}
 # GROUP_ADMINS=workshop-admins
 
 OBJ_DIR=${TMP_DIR}/workshop
-HTPASSWD_FILE=${OBJ_DIR}/htpasswd-workshop
+DEFAULT_HTPASSWD=${OBJ_DIR}/htpasswd-workshop
 
 # shellcheck disable=SC2120
 genpass(){
@@ -16,44 +16,55 @@ genpass(){
 }
 
 htpasswd_add_user(){
-  TMP_DIR=${TMP_DIR:-scratch}
-  HTPASSWD=${1:-${TMP_DIR}/htpasswd-local}
-  USERNAME=${2:-admin}
-  PASSWORD=${3:-$(genpass 16)}
-
+  USER=${1:-admin}
+  PASS=${2:-$(genpass)}
+  HTPASSWD_FILE=${3:-${DEFAULT_HTPASSWD}}
 
   echo "
-    USERNAME: ${USERNAME}
-    PASSWORD: ${PASSWORD}
+    USERNAME: ${USER}
+    PASSWORD: ${PASS}
+
+    FILENAME:  ${HTPASSWD_FILE}
+    PASSWORDS: ${HTPASSWD_FILE}.txt
   "
 
-  touch "${HTPASSWD}"{,.txt}
-  sed -i '/# '"${USERNAME}"'/d' "${HTPASSWD}.txt"
-  echo "# ${USERNAME} - ${PASSWORD}" >> "${HTPASSWD}.txt"
-  htpasswd -bB -C 10 "${HTPASSWD}" "${USERNAME}" "${PASSWORD}"
+  touch "${HTPASSWD_FILE}" "${HTPASSWD_FILE}".txt
+  sed -i '/# '"${USER}"'/d' "${HTPASSWD_FILE}".txt
+  echo "# ${USER} - ${PASS}" >> "${HTPASSWD_FILE}.txt"
+
+  if which htpasswd >/dev/null 2>&1; then
+    echo "using local htpasswd..."
+    htpasswd -b -B -C10 "${HTPASSWD_FILE}" "${USER}" "${PASS}"
+  else
+    echo "using oc to run pod..."
+    oc run \
+      --image httpd \
+      -q --rm -i minion -- /bin/sh -c 'sleep 2; htpasswd -n -b -B -C10 '"${USER}"' '"${PASS}"'' > "${HTPASSWD_FILE}" 2>/dev/null
+  fi
 }
 
-htpasswd_get_file(){
-  HTPASSWD=${1:-"${TMP_DIR}/htpasswd-local"}
+htpasswd_ocp_get_file(){
+  HTPASSWD_FILE=${1:-${DEFAULT_HTPASSWD}}
+  HTPASSWD_NAME=$(basename "${HTPASSWD_FILE}")
 
   oc -n openshift-config \
-    extract secret/"${HTPASSWD##*/}" \
+    get secret/"${HTPASSWD_NAME}" > /dev/null 2>&1 || return 1
+
+  oc -n openshift-config \
+    extract secret/"${HTPASSWD_NAME}" \
     --keys=htpasswd \
-    --to=- > "${HTPASSWD}"
+    --to=- > "${HTPASSWD_FILE}" 2>/dev/null
 }
 
-htpasswd_set_file(){
-  HTPASSWD=${1:-"${TMP_DIR}/htpasswd-local"}
+htpasswd_ocp_set_file(){
+  HTPASSWD_FILE=${1:-${DEFAULT_HTPASSWD}}
+  HTPASSWD_NAME=$(basename "${HTPASSWD_FILE}")
 
-  if oc -n openshift-config get secret/"${HTPASSWD##*/}" -o name >/dev/null 2>&1; then
-    oc -n openshift-config \
-      set data secret/"${HTPASSWD##*/}" \
-      --from-file=htpasswd="${HTPASSWD}"
-  else
-    oc -n openshift-config \
-      create secret generic "${HTPASSWD##*/}" \
-      --from-file=htpasswd="${HTPASSWD}"
-  fi
+  touch "${HTPASSWD_FILE}" || return 1
+
+  oc -n openshift-config \
+    set data secret/"${HTPASSWD_NAME}" \
+    --from-file=htpasswd="${HTPASSWD_FILE}"
 }
 
 workshop_init(){
@@ -67,11 +78,11 @@ workshop_init(){
 
 workshop_create_admin(){
   # get htpasswd file
-  htpasswd_get_file "${HTPASSWD_FILE}"
+  htpasswd_ocp_get_file "${HTPASSWD_FILE}"
 
   # setup admin user
-  htpasswd_add_user "${HTPASSWD_FILE}" admin
-  htpasswd_set_file "${HTPASSWD_FILE}"
+  htpasswd_add_user admin "$(genpass)" "${HTPASSWD_FILE}"
+  htpasswd_ocp_set_file "${HTPASSWD_FILE}"
 
   # oc adm groups add-users rhods-admins admin
 }
@@ -96,7 +107,7 @@ workshop_create_users(){
   for num in ${LIST[@]}
   do
     # create login hashes
-    htpasswd_add_user "${HTPASSWD_FILE}" "${DEFAULT_USER}${num}" "${DEFAULT_PASS}${num}"
+    htpasswd_add_user "${DEFAULT_USER}${num}" "${DEFAULT_PASS}${num}" "${HTPASSWD_FILE}"
     # workshop_add_user_to_group "${DEFAULT_USER}${num}" "${DEFAULT_GROUP}"
 
     # create user project from template
@@ -109,7 +120,7 @@ workshop_create_users(){
   done
 
   # update htpasswd in cluster
-  htpasswd_set_file "${HTPASSWD_FILE}"
+  htpasswd_ocp_set_file "${HTPASSWD_FILE}"
 
 }
 
@@ -127,7 +138,7 @@ workshop_load_test(){
   done
 
   # update htpasswd in cluster
-  htpasswd_set_file "${HTPASSWD_FILE}"
+  htpasswd_ocp_set_file "${HTPASSWD_FILE}"
 }
 
 setup_user_auth(){
