@@ -33,7 +33,7 @@ Verify GPU autoscale
 oc apply -k demos/test-gpu-autoscale
 
 # watch for new nodes (5-10 mins)
-# watch for vector-add pod (12-15 mins)
+# watch for running nvidia-vector-add pod (12-15 mins)
 watch oc get nodes,pod -n nvidia-gpu-verification
 
 # cleanup gpu workload
