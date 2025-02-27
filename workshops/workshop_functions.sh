@@ -51,7 +51,7 @@ htpasswd_set_file(){
       --from-file=htpasswd="${HTPASSWD}"
   else
     oc -n openshift-config \
-      create generic secret "${HTPASSWD##*/}" \
+      create secret generic "${HTPASSWD##*/}" \
       --from-file=htpasswd="${HTPASSWD}"
   fi
 }
