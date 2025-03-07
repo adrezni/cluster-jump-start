@@ -1,10 +1,11 @@
+$patch: delete
 apiVersion: console.openshift.io/v1
 kind: ConsoleNotification
 metadata:
   name: banner-demo
-spec:
-  # see https://htmlcolorcodes.com/color-picker/
-  backgroundColor: '#F49E10'
-  color: '#FFF'
-  location: BannerTop
-  text: 'WORKSHOP: Structuring Unstructured Data for Healthcare'
+# spec:
+#   # see https://htmlcolorcodes.com/color-picker/
+#   backgroundColor: '#F49E10'
+#   color: '#FFF'
+#   location: BannerTop
+#   text: 'WORKSHOP: Structuring Unstructured Data for Healthcare'
