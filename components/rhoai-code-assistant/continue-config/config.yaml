@@ -1,0 +1,28 @@
+name: code-assistant-config
+version: 0.0.1
+schema: v1
+models:
+  - name: "CodeLlama-7b"
+    model: "codellama-7b"
+    defaultCompletionOptions:
+      contextLength: 128000
+    provider: "openai"
+    apiBase: "https://llama-cpp-code-assistant-03-code-assistant.apps.region-01.clg.lab/v1"
+    apiKey: "NA"
+    requestOptions:
+      caBundlePath: "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
+      timeout: 300000
+    roles:
+      - chat
+      - edit
+      - autocomplete
+      - apply
+    capabilities:
+    - tool_use
+  - name: "Granite Embeddings"
+    model: "granite-embedding-278m-multilingual"
+    provider: "openai"
+    apiBase: "https://granite-embedding-278m-multilingual-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1"
+    apiKey: "68c075d0a37788b72099b0496a298bd6"
+    roles:
+      - embed
