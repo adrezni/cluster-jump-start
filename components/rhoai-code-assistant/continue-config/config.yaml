@@ -7,7 +7,7 @@ models:
     defaultCompletionOptions:
       contextLength: 128000
     provider: "openai"
-    apiBase: "https://llama-cpp-code-assistant-03-code-assistant.apps.region-01.clg.lab/v1"
+    apiBase: "http://codellama-7b-svc.rhoai-code-assistant.svc.cluster.local/v1"
     apiKey: "NA"
     requestOptions:
       caBundlePath: "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
@@ -19,10 +19,3 @@ models:
       - apply
     capabilities:
     - tool_use
-  - name: "Granite Embeddings"
-    model: "granite-embedding-278m-multilingual"
-    provider: "openai"
-    apiBase: "https://granite-embedding-278m-multilingual-maas-apicast-production.apps.prod.rhoai.rh-aiservices-bu.com:443/v1"
-    apiKey: "68c075d0a37788b72099b0496a298bd6"
-    roles:
-      - embed
